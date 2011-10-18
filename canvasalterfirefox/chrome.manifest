@@ -1,0 +1,6 @@
+# The "ccffext" is chosen to be the internal identifier of the extension
+
+# Main data
+content canvasalterfirefox content/
+
+overlay chrome://browser/content/browser.xul chrome://canvasalterfirefox/content/browser.xul
