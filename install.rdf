@@ -3,11 +3,11 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
 	<Description about="urn:mozilla:install-manifest">
-		<em:id>mail@openattribute.org</em:id>
-		<em:name>OA Firefox Canvas</em:name>
-		<em:version>0.1</em:version>
+		<em:id>Pat2@openattribute.com</em:id>
+		<em:name>OpenAttribute Picture Augment</em:name>
+		<em:version>0.11</em:version>
 		<em:type>2</em:type>
-		<em:creator>Pat Lockley</em:creator>
+		<em:creator>Open Attribute</em:creator>
 		<em:description>Add licensing to pictures</em:description>		
 		<em:targetApplication>
 			<Description>

@@ -280,75 +280,79 @@ var page_process = new function page_process() {
 			}
 
 			if (n.nodeName == "IMG") {
-								
-				if(n.width>200&&n.height>200){
 			
-					if (n.offsetWidth != 0) {
-										
-						curWidth = n.offsetWidth;
-						
-					}
-						
-					if (n.offsetHeight != 0) {
-						
-						curHeight = n.offsetHeight;				
-						
-					}
-					
-					license_value  = "";
-										
-					while(value = triple_store.pop()){
-																							
-						if(value[1]=="license"){
-
-							license_value = value[2];
-												
-						}								
-										
-					}
-					
-					if (n.offsetWidth != 0) {
-									
-						curWidth = n.offsetWidth;
-					
-					}
-					
-					if (n.offsetHeight != 0) {
-					
-						curHeight = n.offsetHeight;				
-					
-					}
-					
-					var canvas = content.createElement("canvas");				
-
-					canvas.setAttribute('width',curWidth);  
-					canvas.setAttribute('height',curHeight); 
+				if(n.id!="il_fi"){
 								
-					n.parentNode.appendChild(canvas);	
-														
-					var ctx = canvas.getContext("2d");
-						  
-					ctx.drawImage(n, 0, 0);
-								
-					//if(license_found){
-												
-						if(license_value==""){
-								
-							license_value  = "No License found";
-								
+					if(n.width>200&&n.height>200){
+				
+						if (n.offsetWidth != 0) {
+											
+							curWidth = n.offsetWidth;
+							
 						}
+							
+						if (n.offsetHeight != 0) {
+							
+							curHeight = n.offsetHeight;				
+							
+						}
+						
+						license_value  = "";
+											
+						while(value = triple_store.pop()){
+																								
+							if(value[1]=="license"){
+
+								license_value = value[2];
+													
+							}								
+											
+						}
+						
+						if (n.offsetWidth != 0) {
 										
-						ctx.fillRect(0, (curHeight-25), curWidth, (curHeight-25));
-						ctx.fillStyle = "White";
-										
-						ctx.fillText(n.src,0, (curHeight-18));
-						ctx.fillText(license_value,0, (curHeight-5));
-												
-						n.parentNode.removeChild(n);
-								
-					//}
+							curWidth = n.offsetWidth;
+						
+						}
+						
+						if (n.offsetHeight != 0) {
+						
+							curHeight = n.offsetHeight;				
+						
+						}
+						
+						var canvas = content.createElement("canvas");				
+
+						canvas.setAttribute('width',curWidth);  
+						canvas.setAttribute('height',curHeight); 
+									
+						n.parentNode.appendChild(canvas);	
 															
-				}							
+						var ctx = canvas.getContext("2d");
+							  
+						ctx.drawImage(n, 0, 0);
+									
+						//if(license_found){
+													
+							if(license_value==""){
+									
+								license_value  = "No License found";
+									
+							}
+											
+							ctx.fillRect(0, (curHeight-25), curWidth, (curHeight-25));
+							ctx.fillStyle = "White";
+											
+							ctx.fillText(n.src,0, (curHeight-18));
+							ctx.fillText(license_value,0, (curHeight-5));
+													
+							n.parentNode.removeChild(n);
+									
+						//}
+																
+					}	
+
+				}
 										
 			}
 			
