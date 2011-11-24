@@ -1,32 +1,29 @@
-triplesHtml = "";
+var openattribute_pictureaugment = new Object;
 
-var n = document;
-var rootNode = n;
-var triple_store = new Array();
-var license_found = false; 
-var img_counter = 0;
+openattribute_pictureaugment.triplesHtml = "";
+openattribute_pictureaugment.triple_store = new Array();
 
 function add_triple(data_triple){
 		
-	if (triple_store.length == 0) {
+	if (openattribute_pictureaugment.triple_store.length == 0) {
 	
-		triple_store.push(data_triple);	
+		openattribute_pictureaugment.triple_store.push(data_triple);	
 		
 	}else{
 				
 		var triple_not_found = false;
 	
-		for (var x = 0; x < triple_store.length; x++) {
+		for (var x = 0; x < openattribute_pictureaugment.triple_store.length; x++) {
 			
-			if (triple_store[x][0] != data_triple[0]) {
+			if (openattribute_pictureaugment.triple_store[x][0] != data_triple[0]) {
 					
-				triple_store.push(data_triple);
+				openattribute_pictureaugment.triple_store.push(data_triple);
 				triple_not_found = false;
 				break;
 			
 			}
 		
-			if(triple_store[x][1]!=data_triple[1]){
+			if(openattribute_pictureaugment.triple_store[x][1]!=data_triple[1]){
 							
 				triple_not_found = true;
 				
@@ -41,7 +38,7 @@ function add_triple(data_triple){
 		
 		if(triple_not_found){
 	
-			triple_store.push(data_triple);
+			openattribute_pictureaugment.triple_store.push(data_triple);
 			if(data_triple[1]=="license"){
 			
 				license_found = true;
@@ -54,13 +51,13 @@ function add_triple(data_triple){
 	
 }
 
-meta_passed = false;
+openattribute_pictureaugment.meta_passed = false;
 
 var page_process = new function page_process() {
 
 	this.init = function (content){
 	
-		triple_store = new Array();
+		openattribute_pictureaugment.triple_store = new Array();
 			
 		var n = content;
 								
@@ -280,7 +277,7 @@ var page_process = new function page_process() {
 			}
 
 			if (n.nodeName == "IMG") {
-			
+						
 				if(n.id!="il_fi"){
 								
 					if(n.width>200&&n.height>200){
@@ -297,9 +294,9 @@ var page_process = new function page_process() {
 							
 						}
 						
-						license_value  = "";
-											
-						while(value = triple_store.pop()){
+						license_value  = "";		
+						
+						while(value = openattribute_pictureaugment.triple_store.pop()){
 																								
 							if(value[1]=="license"){
 
