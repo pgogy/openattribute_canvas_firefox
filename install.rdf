@@ -5,9 +5,10 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>Pat2@openattribute.com</em:id>
 		<em:name>OpenAttribute Picture Augment</em:name>
-		<em:version>0.13</em:version>
+		<em:version>0.2</em:version>
 		<em:type>2</em:type>
 		<em:creator>Open Attribute</em:creator>
+		<em:creator>pgogy</em:creator>
 		<em:description>Add licensing to pictures</em:description>		
 		<em:targetApplication>
 			<Description>

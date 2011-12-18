@@ -3,59 +3,61 @@ var openattribute_pictureaugment = new Object;
 openattribute_pictureaugment.triplesHtml = "";
 openattribute_pictureaugment.triple_store = new Array();
 
-function add_triple(data_triple){
+openattribute_pictureaugment.meta_passed = false;
+
+openattribute_pictureaugment.code_obj = "";
+
+var openattributepictureaugment_page_process = new function picture_augment_page_process() {
+
+	this.add_triple = function(data_triple){
 		
-	if (openattribute_pictureaugment.triple_store.length == 0) {
-	
-		openattribute_pictureaugment.triple_store.push(data_triple);	
+		if (openattribute_pictureaugment.triple_store.length == 0) {
 		
-	}else{
-				
-		var triple_not_found = false;
-	
-		for (var x = 0; x < openattribute_pictureaugment.triple_store.length; x++) {
+			openattribute_pictureaugment.triple_store.push(data_triple);	
 			
-			if (openattribute_pictureaugment.triple_store[x][0] != data_triple[0]) {
+		}else{
 					
+			var triple_not_found = false;
+		
+			for (var x = 0; x < openattribute_pictureaugment.triple_store.length; x++) {
+				
+				if (openattribute_pictureaugment.triple_store[x][0] != data_triple[0]) {
+						
+					openattribute_pictureaugment.triple_store.push(data_triple);
+					triple_not_found = false;
+					break;
+				
+				}
+			
+				if(openattribute_pictureaugment.triple_store[x][1]!=data_triple[1]){
+								
+					triple_not_found = true;
+					
+				}else{
+					
+					triple_not_found = false;
+					break;
+					
+				}
+				
+			}
+			
+			if(triple_not_found){
+		
 				openattribute_pictureaugment.triple_store.push(data_triple);
-				triple_not_found = false;
-				break;
-			
-			}
-		
-			if(openattribute_pictureaugment.triple_store[x][1]!=data_triple[1]){
-							
-				triple_not_found = true;
+				if(data_triple[1]=="license"){
 				
-			}else{
+					license_found = true;
 				
-				triple_not_found = false;
-				break;
+				}
 				
-			}
-			
-		}
-		
-		if(triple_not_found){
-	
-			openattribute_pictureaugment.triple_store.push(data_triple);
-			if(data_triple[1]=="license"){
-			
-				license_found = true;
-			
 			}
 			
 		}
 		
 	}
 	
-}
-
-openattribute_pictureaugment.meta_passed = false;
-
-var page_process = new function page_process() {
-
-	this.init = function (content){
+	this.documentparse = function (content){
 	
 		openattribute_pictureaugment.triple_store = new Array();
 			
@@ -192,7 +194,7 @@ var page_process = new function page_process() {
 												if(asset.indexOf("http")==0){
 																								
 													triple_array = Array(asset, attribute, value);
-													add_triple(triple_array)
+													openattribute_pictureaugment.code_obj.add_triple(triple_array)
 													triple_array = Array();													
 													
 												}
@@ -357,34 +359,31 @@ var page_process = new function page_process() {
 												
 		}
 
-	}; 
+	};
+	
+
+	this.documentprocess = function(aEvent) {
+	
 		
-};
+		var doc = aEvent.originalTarget; // doc is document that triggered "onload" event
+		// do something with the loaded page.
+		// doc.location is a Location object (see below for a link).
+		// You can use it to make your code executed on certain pages only.
+		
+				
+		openattribute_pictureaugment.code_obj.documentparse(doc);
+      
+	};
+	
+	this.startprocess = function() {
+	
+		openattribute_pictureaugment.code_obj = this;
+			
+		var appcontent = document.getElementById("appcontent");   // browser
+		if(appcontent)
+		  appcontent.addEventListener("DOMContentLoaded", this.documentprocess, true);
+	};
 
-window.addEventListener("load", function() { myExtension.init(); }, false);
+};	
 
-var myExtension = {
-  init: function() {
-    var appcontent = document.getElementById("appcontent");   // browser
-    if(appcontent)
-      appcontent.addEventListener("DOMContentLoaded", myExtension.onPageLoad, true);
-    var messagepane = document.getElementById("messagepane"); // mail
-    if(messagepane)
-      messagepane.addEventListener("load", function(event) { myExtension.onPageLoad(event); }, true);
-  },
-
-  onPageLoad: function(aEvent) {
-    var doc = aEvent.originalTarget; // doc is document that triggered "onload" event
-    // do something with the loaded page.
-    // doc.location is a Location object (see below for a link).
-    // You can use it to make your code executed on certain pages only.
-   
-	page_process.init(doc);      
-	    // add event listener for page unload 
-    aEvent.originalTarget.defaultView.addEventListener("unload", function(event){ myExtension.onPageUnload(event); }, true);
-  },
-
-  onPageUnload: function(aEvent) {
-    // do something
-  }
-}		
+window.addEventListener("load", function() { openattributepictureaugment_page_process.startprocess(); }, false);
