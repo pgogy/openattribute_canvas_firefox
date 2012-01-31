@@ -8,7 +8,7 @@
 
   <!-- Control the main browser window behavior -->
   <script type="text/javascript"
-	  src="chrome://canvasalterfirefox/content/browser.js"></script>
+	  src="chrome://openattribute_picture_augment/content/browser.js"></script>
 
   
 </overlay>
